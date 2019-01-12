@@ -100,6 +100,7 @@ function mouseClicked() {
       }
       //add appropriate entry to 2D array
       gameArray[gridPos.rowIndex][gridPos.colIndex]=symb;
+      createP(symb+': '+gridPos.rowIndex+', '+gridPos.colIndex);
       //draw X or O in the appropriate grid cell
       drawSymb(symb,gridPos.cellCx, gridPos.cellCy);
       turn+= 1;
@@ -118,6 +119,7 @@ function mouseClicked() {
         textAlign(CENTER);
     		textSize(fontsize)
         text(`${checkVictory()[1]} wins!`,0,(height-fontsize)/2,width,fontsize);
+        createP(`${checkVictory()[1]} wins!`);
       }
       else{
        if(turn>8){
@@ -130,8 +132,9 @@ function mouseClicked() {
          pop();
          fill(0);
          textAlign(CENTER);
-     		textSize(fontsize)
+     		 textSize(fontsize)
          text("Draw!",0,(height-fontsize)/2,width,fontsize);
+         createP('Draw!');
        }
       }
 
