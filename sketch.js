@@ -117,7 +117,7 @@ function mouseClicked() {
         fill(0);
         textAlign(CENTER);
     		textSize(fontsize)
-        text(`${checkVictory()[1]} wins!`,0,height/2,width,fontsize);
+        text(`${checkVictory()[1]} wins!`,0,(height-fontsize)/2,width,fontsize);
       }
       else{
        if(turn>8){
@@ -131,7 +131,7 @@ function mouseClicked() {
          fill(0);
          textAlign(CENTER);
      		textSize(fontsize)
-         text("Draw!",0,height/2,width,fontsize);
+         text("Draw!",0,(height-fontsize)/2,width,fontsize);
        }
       }
 
