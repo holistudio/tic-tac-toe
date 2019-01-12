@@ -13,7 +13,7 @@ var cellH= canvasH/rows
 const gridX = [0,cellW, cellW*2, cellW*3];
 const gridY = [0, cellH, cellH*2, cellH*3];
 
-let pad = 5;
+let pad = 20;
 
 let gameArray = [['','',''],['','',''],['','','']];
 let turn = 0;
@@ -153,6 +153,7 @@ function setup() {
   for(let i=1; i<cols; i++){
     line(gridX[i],0,gridX[i],canvasH);
 	}
+  strokeWeight(20);
 }
 
 function draw() {
