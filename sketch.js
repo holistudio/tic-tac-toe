@@ -20,22 +20,28 @@ let turn = 0;
 let endOfGame = false;
 
 function checkVictory(){
+  let pattern = '';
   //handle blanks
   //handle draw
   //check 3 in a row in a row
   for(let i=0; i<rows; i++){
-    if((gameArray[i][0]==gameArray[i][1]) && (gameArray[i][0]==gameArray[i][2])){
-      return[true,gameArray[i][0]];
+    pattern = gameArray[i].toString();
+    if (pattern=='X,X,X' || pattern=='O,O,O'){
+      return [true,gameArray[i][0]];
     }
+
   }
   //check 3 in a row in a column
   for(let i=0; i<cols; i++){
-    if((gameArray[0][i]==gameArray[1][i]) && (gameArray[0][i]==gameArray[2][i])){
-      return[true,gameArray[0][i]];
+    pattern = [gameArray[0][i],gameArray[1][i],gameArray[2][i]].toString();
+    if (pattern=='X,X,X' || pattern=='O,O,O'){
+      return [true,gameArray[0][i]];
     }
   }
+  let diag1 = [gameArray[0][0],gameArray[1][1],gameArray[2][2]];
+  let diag2 = [gameArray[2][0],gameArray[1][1],gameArray[0][2]];
   //check 3 in a row on the two diagonals
-  if(((gameArray[0][0]==gameArray[1][1]) && (gameArray[0][0]==gameArray[2][2]))||((gameArray[2][0]==gameArray[1][1]) && (gameArray[2][0]==gameArray[0][2]))){
+  if(diag1 == 'X,X,X' || diag1 =='O,O,O' || diag2 == 'X,X,X' || diag2 =='O,O,O'){
       return[true,gameArray[1][1]];
   }
   return [false,''];
@@ -98,16 +104,37 @@ function mouseClicked() {
       drawSymb(symb,gridPos.cellCx, gridPos.cellCy);
       turn+= 1;
     }
-    if(turn>4&&checkVictory()[0]==true){
-      //if there is a victory disable mouseClick
-      endOfGame = true;
-      let fontsize = height*0.25;
-      fill(255,50);
-      rect(0,0,width, height);
-      fill(0);
-      textAlign(CENTER);
-  		textSize(fontsize)
-      text(`${checkVictory()[1]} wins!`,0,height/2,width,fontsize);
+    if(turn>4){
+      if(checkVictory()[0]==true){
+        //if there is a victory disable mouseClick
+        endOfGame = true;
+        let fontsize = height*0.25;
+        push();
+        noStroke();
+        fill(255,0.8*255);
+        rect(0,0,width, height);
+        pop();
+        fill(0);
+        textAlign(CENTER);
+    		textSize(fontsize)
+        text(`${checkVictory()[1]} wins!`,0,height/2,width,fontsize);
+      }
+      else{
+       if(turn>8){
+         endOfGame = true;
+         let fontsize = height*0.25;
+         push();
+         noStroke();
+         fill(255,0.8*255);
+         rect(0,0,width, height);
+         pop();
+         fill(0);
+         textAlign(CENTER);
+     		textSize(fontsize)
+         text("Draw!",0,height/2,width,fontsize);
+       }
+      }
+
 
       //otherwise go forward with rest of this code
     }
